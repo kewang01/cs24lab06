@@ -1,3 +1,4 @@
+
 // evalfull.cpp - evaluates a fully-parenthesized expression
 // NAME(S), DATE
 
@@ -27,7 +28,21 @@ bool balanced(char *expression[], int numTokens) {
                       // Step 2 of this lab, but it won't get full
                       // and it can store any type - <char *> here
 
-    return false; // REPLACE THIS return WITH ACTUAL IMPLEMENTATION
+    char* cur;
+    bool jst=false;
+    for(int i=0;!jst && i<numTokens;i++){
+      cur=expression[i];
+      if(identify(cur)==LEFT){
+	s.push(cur);
+      }
+      else if(identify(cur)==RIGHT && !s.empty()){
+	s.pop();
+      }
+      else if(identify(cur)==RIGHT && s.empty()){
+	jst=true;
+      }
+    }
+    return (s.empty() && !jst); // REPLACE THIS return WITH ACTUAL IMPLEMENTATION
 }
 
 // DO NOT CHANGE ANYTHING BELOW - BUT DO READ IT
